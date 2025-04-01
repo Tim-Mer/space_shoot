@@ -1,8 +1,9 @@
 # space_shoot
 
-| Setup
+## Setup
 
 source setup.sh
 
-
+---
 boot.dev asteroids project
+---
