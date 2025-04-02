@@ -4,6 +4,7 @@ from player import *
 from asteroid import *
 from asteroidfield import *
 from shot import *
+from score import *
 
 def main():
     print("Starting Asteroids!")
@@ -27,6 +28,7 @@ def main():
     
     player = Player(SCREEN_WIDTH/2, SCREEN_HEIGHT/2)
     asteroidfield = AsteroidField()
+    score = ScoreBoard()
     
     #GAME LOOP
     while True:
@@ -45,9 +47,11 @@ def main():
         for asteroid in asteroids:
             if asteroid.collision(player):
                 print("Game over!")
+                score.display()
                 return
             for shot in shots:
                 if asteroid.collision(shot):
+                    score.add_score(1)
                     asteroid.split()
                     shot.kill()
             
@@ -57,6 +61,8 @@ def main():
             
         # Update clock
         dt = clock.tick(60)/1000
+        
+        score.time += dt
         
         #Refresh screen
         pygame.display.flip()
